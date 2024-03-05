@@ -1,10 +1,8 @@
 import React, { useState, useCallback } from "react";
 import Input from "./Input";
 
-
 const AddItemForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({ name: "", quantity: "" });
-  
 
   const handleInputChange = useCallback((e) => {
     setFormData((prevData) => ({
@@ -41,8 +39,12 @@ const AddItemForm = ({ onSubmit }) => {
         value={formData.quantity}
         onChange={handleInputChange}
       />
-      <button className="p-2 rounded-md bg-green-300" type="submit">
-        Dodaj do lodówki
+      <button
+        className="p-2 rounded-md bg-green-300 text-[15px]"
+        type="submit"
+      >
+        <span className="hidden md:inline-block"> Dodaj do lodówki</span>
+        <span className="md:hidden inline-block"> Dodaj</span>
       </button>
     </form>
   );
