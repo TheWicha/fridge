@@ -26,13 +26,13 @@ const AddItemForm = ({ onSubmit }) => {
         formData.quantity > 0 && formData.quantity < 1
           ? 1
           : parseFloat(formData.quantity);
-      onSubmit(formData.name, adjustedQuantity, formData.category);
+
       const errorItem = await onSubmit(
         formData.name,
         adjustedQuantity,
         formData.category
       );
-      // setError(errorItem);
+      setError(errorItem);
       setFormData({ name: "", quantity: "", category: formData.category });
     },
     [formData, onSubmit]
