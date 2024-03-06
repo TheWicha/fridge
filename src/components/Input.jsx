@@ -9,9 +9,7 @@ const Input = ({ value, onChange, label, placeholder, type, name }) => {
       <input
         id={label}
         type={type}
-        className={clsx("rounded-md p-2 w-full transition-all duration-200", {
-          "focus:border-blue-500 focus:ring-2 focus:ring-blue-600": true,
-        })}
+        className={clsx("rounded-md p-2 w-full transition-all duration-200")}
         value={value}
         onChange={onChange}
         name={name}
