@@ -12,23 +12,23 @@ const ItemList = ({
 }) => {
   return (
     <>
-      <div class="mx-auto px-5 bg-white min-h-sceen">
-        <div class="grid divide-y divide-neutral-200 mx-auto mt-8">
-          <div class="bg-slate-200">
-            <details class="group">
-              <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
+      <div className="mx-auto px-5 bg-white min-h-sceen">
+        <div className="grid divide-y divide-neutral-200 mx-auto mt-8">
+          <div className="bg-slate-200">
+            <details className="group">
+              <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
                 <p className="px-4 py-2 ">
                   <span>{category}:</span>
                 </p>
-                <span class="transition group-open:rotate-180">
+                <span className="transition group-open:rotate-180">
                   <svg
                     fill="none"
                     height="24"
-                    shape-rendering="geometricPrecision"
+                    shapeRendering="geometricPrecision"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                     viewBox="0 0 24 24"
                     width="24"
                   >

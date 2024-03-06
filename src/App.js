@@ -18,7 +18,7 @@ const Home = () => {
   const fridgeItems = items.filter((item) => item.category === "fridge");
   const spicesItems = items.filter((item) => item.category === "spices");
   const chemistryItems = items.filter((item) => item.category === "chemistry");
-
+  console.log(items, "items");
   return (
     <div>
       <AddItemForm onSubmit={handleAddItem} />

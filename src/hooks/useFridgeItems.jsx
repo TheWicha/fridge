@@ -13,7 +13,7 @@ const graphQLClient = new GraphQLClient(graphqlAPI, {
 const fetchFridgeItems = async () => {
   const query = `
     query MyQuery {
-      fridgeItems {
+      fridgeItems(first: 100)  {
         id
         name
         quantity
