@@ -1,15 +1,8 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { TrashIcon } from "@radix-ui/react-icons";
 import clsx from "clsx";
 
-const ItemList = ({
-  items,
-  onRemove,
-  onIncrease,
-  onDecrease,
-  isLoading,
-  category,
-}) => {
+const ItemList = ({ items, onRemove, onIncrease, onDecrease, category }) => {
   return (
     <>
       <div className="mx-auto px-5 bg-white min-h-sceen">
@@ -39,8 +32,9 @@ const ItemList = ({
               <ul className="bg-white">
                 {items.map((item, index) => (
                   <li
+                    name={item.name}
                     key={index}
-                    className="px-4 py-2 flex justify-between border-b"
+                    className={clsx("px-4 py-2 flex justify-between border-b")}
                   >
                     <p
                       className={clsx({

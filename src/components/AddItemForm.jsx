@@ -8,7 +8,7 @@ const AddItemForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: "",
     quantity: "",
-    category: "",
+    category: "fridge",
   });
 
   const handleInputChange = useCallback((e) => {
@@ -33,8 +33,9 @@ const AddItemForm = ({ onSubmit }) => {
         formData.category
       );
       setError(errorItem);
+
       setFormData({ name: "", quantity: "", category: formData.category });
-       toast("Dodano produkt!");
+      toast("Dodano produkt!");
     },
     [formData, onSubmit]
   );

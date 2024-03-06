@@ -13,7 +13,7 @@ const graphQLClient = new GraphQLClient(graphqlAPI, {
 const fetchFridgeItems = async () => {
   const query = `
     query MyQuery {
-      fridgeItems(first: 100)  {
+      fridgeItems(first: 200)  {
         id
         name
         quantity
@@ -24,6 +24,7 @@ const fetchFridgeItems = async () => {
 
   try {
     const data = await graphQLClient.request(query);
+
     return data;
   } catch (error) {
     throw new Error("Error fetching fridge items: " + error.message);
