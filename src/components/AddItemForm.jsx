@@ -48,7 +48,7 @@ const AddItemForm = ({ onSubmit }) => {
       <Toast />
       <form
         onSubmit={handleSubmit}
-        className="p-4 bg-blue-400 flex items-center"
+        className="p-4 bg-blue-400 flex flex-col md:flex-row"
       >
         <Input
           name="name"
@@ -64,7 +64,7 @@ const AddItemForm = ({ onSubmit }) => {
           onChange={handleInputChange}
         />
         <select
-          className="p-[0.6rem] rounded-md"
+          className="p-1 md:ml-2 text-[13px] h-10 rounded-md"
           name="category"
           onChange={handleInputChange}
         >
@@ -74,7 +74,7 @@ const AddItemForm = ({ onSubmit }) => {
           <option value="chemistry">Chemia</option>
         </select>
         <button
-          className="p-2 ml-2 rounded-md bg-green-300 text-[15px]"
+          className="p-2 mt-2 md:mt-0 md:ml-2 rounded-md bg-green-300 text-[15px]"
           type="submit"
         >
           <span> Dodaj </span>

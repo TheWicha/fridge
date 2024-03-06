@@ -5,7 +5,7 @@ const Input = ({ value, onChange, label, placeholder, type, name }) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <div className="m-2 relative">
+    <div className="mb-2 md:ml-2 md:mb-0 relative">
       <input
         id={label}
         type={type}
