@@ -46,20 +46,20 @@ const ItemList = ({ items, onRemove, onIncrease, onDecrease, category }) => {
                     </p>
                     <div className="flex items-center">
                       <button
-                        className="m-2 bg-green-300 rounded-lg w-12 text-black"
+                        className="m-2 bg-green-300 rounded-lg w-12 text-black hover:bg-green-500"
                         onClick={() => onIncrease(item)}
                       >
                         +
                       </button>
                       <button
-                        className="m-2 bg-red-300 rounded-lg w-12 text-black"
+                        className="m-2 bg-red-300 rounded-lg w-12 text-black hover:bg-red-500"
                         onClick={() => onDecrease(item)}
                       >
                         -
                       </button>
                       <button
                         onClick={() => onRemove({ index, id: item.id })}
-                        className="ml-2 h-6 w-6 bg-gray-400 rounded-lg text-black"
+                        className="ml-2 h-6 w-6 bg-gray-300 rounded-lg text-black hover:bg-gray-400"
                       >
                         <TrashIcon className="w-6" />
                       </button>
