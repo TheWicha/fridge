@@ -15,14 +15,35 @@ const Home = () => {
     handleDecreaseQuantity,
   } = useFridgeItemsManager();
 
+  const fridgeItems = items.filter((item) => item.category === "fridge");
+  const spicesItems = items.filter((item) => item.category === "spices");
+  const chemistryItems = items.filter((item) => item.category === "chemistry");
+
   return (
     <div>
       <AddItemForm onSubmit={handleAddItem} />
-      <p className="px-4 py-2  bg-slate-200">
-        <span>Produkty w lodówce:</span>
-      </p>
+
       <ItemList
-        items={items}
+        category="Lodówka"
+        items={fridgeItems}
+        onRemove={handleRemoveItem}
+        onIncrease={handleIncreaseQuantity}
+        onDecrease={handleDecreaseQuantity}
+        isLoading={isLoading}
+        isError={isError}
+      />
+      <ItemList
+        category="Przyprawy"
+        items={spicesItems}
+        onRemove={handleRemoveItem}
+        onIncrease={handleIncreaseQuantity}
+        onDecrease={handleDecreaseQuantity}
+        isLoading={isLoading}
+        isError={isError}
+      />
+      <ItemList
+        category="Chemia"
+        items={chemistryItems}
         onRemove={handleRemoveItem}
         onIncrease={handleIncreaseQuantity}
         onDecrease={handleDecreaseQuantity}

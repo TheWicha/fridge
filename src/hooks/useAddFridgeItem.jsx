@@ -4,21 +4,26 @@ const graphqlAPI = process.env.REACT_APP_NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 const graphQLClient = new GraphQLClient(graphqlAPI);
 
-const addFridgeItem = async ({ name, quantity }) => {
+const addFridgeItem = async ({ name, quantity, category }) => {
   const query = `
-    mutation MyMutation($name: String!, $quantity: Int!) {
-      createFridgeItem(data: { name: $name, quantity: $quantity }) {
-        id
-        name
-        quantity
-      }
-        publishManyFridgeItems {
-count
+mutation MyMutation($name: String!, $quantity: Int!, $category:String!) {
+  createFridgeItem(
+    data: {name: $name, quantity: $quantity, category: $category}
+  ) {
+    id
+    name
+    quantity
+    category
   }
-    }
+  publishManyFridgeItems {
+    count
+  }
+}
+
+
   `;
 
-  const variables = { name, quantity };
+  const variables = { name, quantity, category };
 
   try {
     const data = await graphQLClient.request(query, variables);

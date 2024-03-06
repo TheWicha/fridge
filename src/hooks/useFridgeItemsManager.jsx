@@ -22,15 +22,17 @@ const useFridgeItemsManager = () => {
     }
   }, [data]);
 
-  const handleAddItem = async (name, quantity) => {
+  const handleAddItem = async (name, quantity, category) => {
     try {
       const addedItem = await addFridgeItemMutation.mutateAsync({
         name,
         quantity: parseInt(quantity),
+        category,
       });
       setItemsWithId([...itemsWithId, { ...addedItem, id: addedItem.id }]);
     } catch (error) {
       console.error("Error adding item:", error);
+      return { error };
     }
   };
 

@@ -17,6 +17,7 @@ const fetchFridgeItems = async () => {
         id
         name
         quantity
+        category
       }
     }
   `;
