@@ -22,10 +22,10 @@ const Input = ({ value, onChange, label, placeholder, type, name }) => {
       <label
         htmlFor={label}
         className={clsx(
-          "absolute left-3 transition-all duration-200 text-black bg-white p-1 rounded-md pointer-events-none  text-[10px] md:text-[15px] ",
+          "absolute left-3 transition-all duration-200 text-black bg-white p-1 rounded-md pointer-events-none",
           {
-            "top-[-12px] md:text-[10px]": value || isFocused,
-            "md:top-1 top-2": !value && !isFocused,
+            "text-[10px] md:text-[10px] top-[-10px]": value || isFocused,
+            "text-[12px] md:text-[15px] md:top-1 top-2": !value && !isFocused,
           }
         )}
       >
