@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AddItemForm from "./components/AddItemForm";
 import ItemList from "./components/ItemList";
 import getFridgeItems from "./hooks/useFridgeItems";
 import useAddFridgeItem from "./hooks/useAddFridgeItem";
 import useDeleteFridgeItem from "./hooks/useDeleteFridgeItem";
+import useUpdateFridgeItem from "./hooks/useUpdateFridgeItem";
 
 const Home = () => {
   const { data, isLoading, isError, error } = getFridgeItems();
   const addFridgeItemMutation = useAddFridgeItem();
   const deleteFridgeItemMutation = useDeleteFridgeItem();
+  const updateFridgeItemMutation = useUpdateFridgeItem();
+  const itemsRef = useRef();
 
   const [items, setItems] = useState([]);
 
@@ -34,23 +37,29 @@ const Home = () => {
     await deleteFridgeItemMutation.mutateAsync(id);
   };
 
-  const handleIncreaseQuantity = (index) => {
-    let newItems = [...items];
-    newItems[index].quantity += 1;
+  const handleIncreaseQuantity = async (item) => {
+    const newItems = [...items];
+
+    const update = newItems.find((product) => product.id === item.id);
+    update.quantity += 1;
     setItems(newItems);
+    await updateFridgeItemMutation.mutateAsync({
+      name: item.name,
+      quantity: item.quantity + 1,
+    });
+  };
+  const handleDecreaseQuantity = async (item) => {
+    const newItems = [...items];
+
+    const update = newItems.find((product) => product.id === item.id);
+    update.quantity -= 1;
+    setItems(newItems);
+    await updateFridgeItemMutation.mutateAsync({
+      name: item.name,
+      quantity: item.quantity - 1,
+    });
   };
 
-  const handleDecreaseQuantity = (index) => {
-    let newItems = [...items];
-    if (newItems[index].quantity > 0) {
-      newItems[index].quantity -= 1;
-    }
-    setItems(newItems);
-  };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
@@ -59,10 +68,12 @@ const Home = () => {
         <span>Produkty w lodówce:</span>
       </p>
       <ItemList
+        itemsRef={itemsRef}
         items={items}
         onRemove={handleRemoveItem}
         onIncrease={handleIncreaseQuantity}
         onDecrease={handleDecreaseQuantity}
+        isLoading={isLoading}
       />
     </div>
   );
