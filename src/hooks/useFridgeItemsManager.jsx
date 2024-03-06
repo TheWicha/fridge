@@ -53,7 +53,7 @@ const useFridgeItemsManager = () => {
   };
 
   const handleDecreaseQuantity = async (item) => {
-    if (item.quantity > 1) {
+    if (item.quantity >= 1) {
       const updatedItem = { ...item, quantity: item.quantity - 1 };
       setItemsWithId(
         itemsWithId.map((i) => (i.id === item.id ? updatedItem : i))

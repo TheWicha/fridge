@@ -1,5 +1,6 @@
 import React from "react";
 import { TrashIcon } from "@radix-ui/react-icons";
+import clsx from "clsx";
 
 const ItemList = ({ items, onRemove, onIncrease, onDecrease, isLoading }) => {
   if (isLoading) {
@@ -13,7 +14,11 @@ const ItemList = ({ items, onRemove, onIncrease, onDecrease, isLoading }) => {
     <ul className="bg-white">
       {items.map((item, index) => (
         <li key={index} className="px-4 py-2 flex justify-between border-b">
-          <p>
+          <p
+            className={clsx({
+              "text-red-500": item.quantity === 0,
+            })}
+          >
             <span>{item.name}</span> - <span>{item.quantity} szt.</span>
           </p>
           <div className="flex items-center">
