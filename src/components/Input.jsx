@@ -25,7 +25,7 @@ const Input = ({ value, onChange, label, placeholder, type, name }) => {
           "absolute left-3 transition-all duration-200 text-black bg-white p-1 rounded-md pointer-events-none text-[10px] md:text-[15px]",
           {
             "top-[-12px]": value || isFocused,
-            "top-1": !value && !isFocused,
+            "md:top-1 top-2": !value && !isFocused,
           }
         )}
       >
