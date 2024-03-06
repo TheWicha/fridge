@@ -10,13 +10,7 @@ const ItemList = ({
   isLoading,
   category,
 }) => {
-  if (isLoading) {
-    return (
-      <div className="w-full flex justify-center p-6 animate-ping ">
-        Loading...
-      </div>
-    );
-  }
+ 
   return (
     <>
       <p className="px-4 py-2  bg-slate-200">

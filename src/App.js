@@ -22,34 +22,39 @@ const Home = () => {
   return (
     <div>
       <AddItemForm onSubmit={handleAddItem} />
-
-      <ItemList
-        category="Lodówka"
-        items={fridgeItems}
-        onRemove={handleRemoveItem}
-        onIncrease={handleIncreaseQuantity}
-        onDecrease={handleDecreaseQuantity}
-        isLoading={isLoading}
-        isError={isError}
-      />
-      <ItemList
-        category="Przyprawy"
-        items={spicesItems}
-        onRemove={handleRemoveItem}
-        onIncrease={handleIncreaseQuantity}
-        onDecrease={handleDecreaseQuantity}
-        isLoading={isLoading}
-        isError={isError}
-      />
-      <ItemList
-        category="Chemia"
-        items={chemistryItems}
-        onRemove={handleRemoveItem}
-        onIncrease={handleIncreaseQuantity}
-        onDecrease={handleDecreaseQuantity}
-        isLoading={isLoading}
-        isError={isError}
-      />
+      {isLoading && (
+        <div className="w-full flex justify-center p-6 animate-ping ">
+          Loading...
+        </div>
+      )}
+      {!isLoading && (
+        <>
+          <ItemList
+            category="Lodówka"
+            items={fridgeItems}
+            onRemove={handleRemoveItem}
+            onIncrease={handleIncreaseQuantity}
+            onDecrease={handleDecreaseQuantity}
+            isError={isError}
+          />
+          <ItemList
+            category="Przyprawy"
+            items={spicesItems}
+            onRemove={handleRemoveItem}
+            onIncrease={handleIncreaseQuantity}
+            onDecrease={handleDecreaseQuantity}
+            isError={isError}
+          />
+          <ItemList
+            category="Chemia"
+            items={chemistryItems}
+            onRemove={handleRemoveItem}
+            onIncrease={handleIncreaseQuantity}
+            onDecrease={handleDecreaseQuantity}
+            isError={isError}
+          />
+        </>
+      )}
     </div>
   );
 };
