@@ -34,6 +34,7 @@ const AddItemForm = ({ onSubmit }) => {
       );
       setError(errorItem);
       setFormData({ name: "", quantity: "", category: formData.category });
+       toast("Dodano produkt!");
     },
     [formData, onSubmit]
   );
