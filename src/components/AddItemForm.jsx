@@ -68,7 +68,6 @@ const AddItemForm = ({ onSubmit }) => {
           name="category"
           onChange={handleInputChange}
         >
-          <option value="none">Wybierz kategorię</option>
           <option value="fridge">Lodówka</option>
           <option value="spices">Przyprawy</option>
           <option value="chemistry">Chemia</option>
