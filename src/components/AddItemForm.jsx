@@ -32,16 +32,16 @@ const AddItemForm = ({ onSubmit }) => {
         adjustedQuantity,
         formData.category
       );
-      setError(errorItem);
+      // setError(errorItem);
       setFormData({ name: "", quantity: "", category: formData.category });
     },
     [formData, onSubmit]
   );
 
-  if (error?.error?.message) {
-    setError("");
-    toast("taki produkt już istnieje!");
-  }
+  // if (error?.error?.message) {
+  //   setError("");
+  //   toast("taki produkt już istnieje!");
+  // }
 
   return (
     <>

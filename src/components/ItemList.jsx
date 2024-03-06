@@ -46,7 +46,7 @@ const ItemList = ({
                 -
               </button>
               <button
-                onClick={() => onRemove(index, item.id)}
+                onClick={() => onRemove({ index, id: item.id })}
                 className="ml-2 h-6 w-6 bg-gray-400 rounded-lg text-black"
               >
                 <TrashIcon className="w-6" />

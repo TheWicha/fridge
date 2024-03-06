@@ -36,11 +36,10 @@ const useFridgeItemsManager = () => {
     }
   };
 
-  const handleRemoveItem = async (index) => {
-    const removedItemId = itemsWithId[index].id;
-    const newItems = itemsWithId.filter((_, itemIndex) => itemIndex !== index);
+  const handleRemoveItem = async ({ index, id }) => {
+    const newItems = itemsWithId.filter((item) => item.id !== id);
     setItemsWithId(newItems);
-    await deleteFridgeItemMutation.mutate(removedItemId);
+    await deleteFridgeItemMutation.mutate(id);
   };
 
   const handleIncreaseQuantity = async (item) => {
