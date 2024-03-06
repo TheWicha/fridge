@@ -1,23 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import AddItemForm from "./components/AddItemForm";
 import ItemList from "./components/ItemList";
-import getFridgeItems from "./hooks/useFridgeItems";
+import useFridgeItems from "./hooks/useFridgeItems";
 import useAddFridgeItem from "./hooks/useAddFridgeItem";
 import useDeleteFridgeItem from "./hooks/useDeleteFridgeItem";
 import useUpdateFridgeItem from "./hooks/useUpdateFridgeItem";
 
 const Home = () => {
-  const { data, isLoading, isError, error } = getFridgeItems();
+  const { data, isLoading, isError, error } = useFridgeItems();
   const addFridgeItemMutation = useAddFridgeItem();
   const deleteFridgeItemMutation = useDeleteFridgeItem();
   const updateFridgeItemMutation = useUpdateFridgeItem();
-  const itemsRef = useRef();
 
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    if (data && data.data.fridgeItems) {
-      setItems(data.data.fridgeItems);
+    if (data && data.fridgeItems) {
+      setItems(data.fridgeItems);
     }
   }, [data]);
 
@@ -34,32 +33,33 @@ const Home = () => {
       (item, itemIndex) => itemIndex !== index
     );
     setItems(newItems);
-    await deleteFridgeItemMutation.mutateAsync(id);
+    await deleteFridgeItemMutation.mutate(id);
   };
 
   const handleIncreaseQuantity = async (item) => {
-    const newItems = [...items];
-
-    const update = newItems.find((product) => product.id === item.id);
-    update.quantity += 1;
-    setItems(newItems);
-    await updateFridgeItemMutation.mutateAsync({
+    setItems(
+      items.map((i) =>
+        i.name === item.name ? { ...i, quantity: i.quantity + 1 } : i
+      )
+    );
+    updateFridgeItemMutation.mutate({
       name: item.name,
       quantity: item.quantity + 1,
     });
   };
-  const handleDecreaseQuantity = async (item) => {
-    const newItems = [...items];
 
-    const update = newItems.find((product) => product.id === item.id);
-    update.quantity -= 1;
-    setItems(newItems);
-    await updateFridgeItemMutation.mutateAsync({
+  const handleDecreaseQuantity = async (item) => {
+    setItems(
+      items.map((i) =>
+        i.name === item.name ? { ...i, quantity: i.quantity - 1 } : i
+      )
+    );
+
+    updateFridgeItemMutation.mutate({
       name: item.name,
       quantity: item.quantity - 1,
     });
   };
-
 
   return (
     <div>
@@ -68,7 +68,6 @@ const Home = () => {
         <span>Produkty w lodówce:</span>
       </p>
       <ItemList
-        itemsRef={itemsRef}
         items={items}
         onRemove={handleRemoveItem}
         onIncrease={handleIncreaseQuantity}

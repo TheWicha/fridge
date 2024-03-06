@@ -1,33 +1,28 @@
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
+import { GraphQLClient } from "graphql-request";
+
+const graphcmsToken = process.env.REACT_APP_GRAPHCMS_TOKEN;
+const graphqlAPI = process.env.REACT_APP_NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
+
+const graphQLClient = new GraphQLClient(graphqlAPI, {
+  headers: {
+    authorization: graphcmsToken,
+  },
+});
 
 const fetchFridgeItems = async () => {
-  try {
-    const response = await fetch(
-      "https://api-eu-west-2.hygraph.com/v2/clrumm5sk033501utgf9t6n7q/master",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          query: `
-          query MyQuery {
-            fridgeItems {
-              id
-              name
-              quantity
-            }
-          }
-        `,
-        }),
+  const query = `
+    query MyQuery {
+      fridgeItems {
+        id
+        name
+        quantity
       }
-    );
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
     }
+  `;
 
-    const data = await response.json();
+  try {
+    const data = await graphQLClient.request(query);
     return data;
   } catch (error) {
     throw new Error("Error fetching fridge items: " + error.message);
@@ -35,7 +30,17 @@ const fetchFridgeItems = async () => {
 };
 
 const useFridgeItems = () => {
-  return useQuery("fridgeItems", fetchFridgeItems);
+  const queryClient = useQueryClient();
+
+  const updateCache = (newData) => {
+    queryClient.setQueryData("fridgeItems", newData);
+  };
+
+  return useQuery("fridgeItems", fetchFridgeItems, {
+    onSuccess: (data) => {
+      updateCache(data);
+    },
+  });
 };
 
 export default useFridgeItems;
