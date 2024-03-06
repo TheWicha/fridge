@@ -38,10 +38,10 @@ const AddItemForm = ({ onSubmit }) => {
     [formData, onSubmit]
   );
 
-  // if (error?.error?.message) {
-  //   setError("");
-  //   toast("taki produkt już istnieje!");
-  // }
+  if (error?.error?.message) {
+    setError("");
+    toast("taki produkt już istnieje!");
+  }
 
   return (
     <>
