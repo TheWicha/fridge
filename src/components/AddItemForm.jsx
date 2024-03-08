@@ -3,7 +3,7 @@ import Input from "./Input";
 import Toast from "./Toast";
 import { toast } from "react-toastify";
 
-const AddItemForm = ({ onSubmit }) => {
+const AddItemForm = ({ onSubmit, onLogout }) => {
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -46,12 +46,9 @@ const AddItemForm = ({ onSubmit }) => {
   }
 
   return (
-    <>
+    <div className="flex bg-blue-400 justify-center items-center  ">
       <Toast />
-      <form
-        onSubmit={handleSubmit}
-        className="p-4 bg-blue-400 flex flex-col md:flex-row"
-      >
+      <form onSubmit={handleSubmit} className="p-4  flex flex-col md:flex-row">
         <Input
           name="name"
           placeholder="Wprowadź nazwę"
@@ -75,13 +72,19 @@ const AddItemForm = ({ onSubmit }) => {
           <option value="chemistry">Chemia</option>
         </select>
         <button
-          className="p-2 mt-2 md:mt-0 md:ml-2 rounded-md bg-green-300 text-[15px]"
+          className="p-2 mt-2 md:mt-0 md:ml-2 rounded-md bg-green-300 text-[15px] hover:bg-green-400"
           type="submit"
         >
           <span> Dodaj </span>
         </button>
       </form>
-    </>
+      <buton
+        className="cursor-pointer hover:bg-slate-200 p-2 rounded-lg bg-white"
+        onClick={() => onLogout(false)}
+      >
+        Wyloguj{" "}
+      </buton>
+    </div>
   );
 };
 
